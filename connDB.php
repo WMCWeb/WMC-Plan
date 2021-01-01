@@ -1,28 +1,27 @@
 <?php
-    $userId = $_POST['userId'];
-    $userPassword = $_POST['userPassword'];
+    $userID = $_POST['userID'];
+    $userPWD = $_POST['userPWD'];
+    $userNAME = $_POST['userNAME'];
+    $userNUM = $_POST['userNUM'];
 
     $conn=mysqli_connect("127.0.0.1","devUser","abcd123$","accountDB");
     //$db=mysqli_select_db("accountDB",$conn);
     if($conn){
-        echo "eb연결성공";
     }
     else
     {
         echo "db연결실패";
     }
     //password 받은 값을 해쉬함수태워서 변환후 $hashpass 에 저장
-    // sha256 해싱 사용
-    $hashpass = hash("sha256",$userPassword);
 
-    $sql = "INSERT INTO account(userID, password, authKey) VALUES ('$userId', '$hashpass' ,'$hashpass')";
-
+    $hashpass = hash("sha256",$userPWD);
+    $sql = "INSERT INTO users(userID, userPWD, userNAME, userNUM) VALUES ('$userID', '$hashpass' ,'$userNAME','$userNUM')";
+     
     if ($conn->query($sql) === TRUE) {
-        echo "삽입 성공";
-    } else {
-        echo "Error: " . $sql . "
-    " . $conn->error;
+    }
+    else {
+        echo "Error: " . $sql . "" . $conn->error;
     }
 
     $conn->close();
-    ?>
+?>
