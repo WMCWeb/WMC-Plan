@@ -24,6 +24,7 @@
         $userKey= password_hash($userPWD,PASSWORD_DEFAULT);
         $sql = "INSERT INTO userKey(userKey, keyTime) VALUES ('$userKey', now() )";
 
+        // update userkey
         $sql_update="UPDATE users SET userKey = '$userKey' WHERE userID='$userID'";
 
         if ($conn->query($sql_update) === TRUE) {
