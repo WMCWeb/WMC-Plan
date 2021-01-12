@@ -23,6 +23,13 @@
     else{
         $userKey= password_hash($userPWD,PASSWORD_DEFAULT);
         $sql = "INSERT INTO userKey(userKey, keyTime) VALUES ('$userKey', now() )";
+
+        $sql_update="UPDATE users SET userKey = '$userKey' WHERE userID='$userID'";
+
+        if ($conn->query($sql_update) === TRUE) {
+          echo "OK_1";
+        }
+
         if ($conn->query($sql) === TRUE) {
         }
         echo "OK";
